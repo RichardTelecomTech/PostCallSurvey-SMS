@@ -1,0 +1,29 @@
+{
+  "id": "9cc91d9b-f29a-48fe-8613-16ae8c19629b",
+  "name": "Post call survey SMS",
+  "topicName": "v2.detail.events.conversation.{id}.user.end",
+  "target": {
+    "type": "Workflow",
+    "id": "be59f5c6-82d6-4b9f-b786-37640fd864ec"
+  },
+  "version": 70,
+  "enabled": true,
+  "matchCriteria": [
+    {
+      "jsonPath": "disconnectType",
+      "operator": "NotEqual",
+      "value": "TRANSFER"
+    },
+    {
+      "jsonPath": "mediaType",
+      "operator": "Equal",
+      "value": "VOICE"
+    },
+    {
+      "jsonPath": "interactingDurationMs",
+      "operator": "GreaterThanOrEqual",
+      "value": 360000
+    }
+  ],
+  "selfUri": "/api/v2/processautomation/triggers/9cc91d9b-f29a-48fe-8613-16ae8c19629b"
+}
