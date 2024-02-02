@@ -1,0 +1,75 @@
+{
+  "name": "SMSPostCallSurveyEngine-Datatable - Exported 2024-01-31 @ 15:35 - Exported 2024-02-02 @ 14:54",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/flows/datatables/671b2f95-d86a-4b1b-a0be-6e8d96b1a8a3/rows",
+      "requestType": "POST",
+      "headers": {},
+      "requestTemplate": "${input.rawRequest}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Row update",
+        "description": "A Row update",
+        "type": "object",
+        "required": [
+          "Key"
+        ],
+        "properties": {
+          "Key": {
+            "description": "Conversation ID",
+            "type": "string"
+          },
+          "conversationid": {
+            "description": "Queue ID",
+            "type": "string"
+          },
+          "userid": {
+            "description": "Lead ID",
+            "type": "string"
+          },
+          "queueid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Row update",
+        "description": "returns the new row",
+        "type": "object",
+        "properties": {
+          "Key": {
+            "description": "Tarjeta",
+            "type": "string"
+          },
+          "conversationid": {
+            "description": "Telefono origen",
+            "type": "string"
+          },
+          "userid": {
+            "type": "string"
+          },
+          "queueid": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}

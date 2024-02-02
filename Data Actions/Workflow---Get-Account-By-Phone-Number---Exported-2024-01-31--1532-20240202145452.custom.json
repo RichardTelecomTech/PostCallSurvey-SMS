@@ -1,0 +1,56 @@
+{
+  "name": "Workflow - Get Account By Phone Number - Exported 2024-01-31 @ 15:32 - Exported 2024-02-02 @ 14:54",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/services/data/v55.0/search/?q=$esc.url(\"FIND {$salesforce.escReserved(${input.PHONE_NUMBER})} IN PHONE FIELDS RETURNING Account(AccountNumber, Id) LIMIT 1\")",
+      "requestType": "GET",
+      "headers": {
+        "UserAgent": "PureCloudIntegrations/1.0"
+      },
+      "requestTemplate": "${input.rawRequest}"
+    },
+    "response": {
+      "translationMap": {
+        "Id": "$.searchRecords..Id"
+      },
+      "translationMapDefaults": {
+        "Id": "[]"
+      },
+      "successTemplate": "{\n\"Id\": ${successTemplateUtils.firstFromArray(\"${Id}\")}}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Phone Number Request",
+        "description": "A phone number-based request.",
+        "type": "object",
+        "required": [
+          "PHONE_NUMBER"
+        ],
+        "properties": {
+          "PHONE_NUMBER": {
+            "description": "The phone number used for the query.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}

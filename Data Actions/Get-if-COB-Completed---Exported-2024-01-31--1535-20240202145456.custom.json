@@ -1,0 +1,47 @@
+{
+  "name": "Get if COB Completed - Exported 2024-01-31 @ 15:35 - Exported 2024-02-02 @ 14:54",
+  "integrationType": "salesforce-datadip",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/services/data/v55.0/query/?q=$esc.url(\"select id,Status from ServiceAppointment where AccountId = '$salesforce.escReserved(${input.Account_ID})' and status = 'Completed' and Account_Type__c = 'Client - Direct' Limit 1\")",
+      "requestType": "GET",
+      "headers": {},
+      "requestTemplate": "${input.rawRequest}"
+    },
+    "response": {
+      "translationMap": {
+        "Status": "$.records..Status"
+      },
+      "translationMapDefaults": {
+        "Status": "[]"
+      },
+      "successTemplate": "{\n\"Status\": ${successTemplateUtils.firstFromArray(\"${Status}\")}}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "Account_ID": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {
+          "Status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}
